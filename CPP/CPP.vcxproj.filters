@@ -6,6 +6,9 @@
     <ClCompile Include="Parts\Part01.cpp">
       <Filter>Parts</Filter>
     </ClCompile>
+    <ClCompile Include="Parts\Part02.cpp">
+      <Filter>Parts</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -13,6 +16,9 @@
       <Filter>Parts</Filter>
     </ClInclude>
     <ClInclude Include="Parts\PartList.h" />
+    <ClInclude Include="Part02.h">
+      <Filter>Parts</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Parts">
