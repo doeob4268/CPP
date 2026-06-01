@@ -14,6 +14,8 @@ public:
 private:
 	// 예제 실행 함수
 	void Overloading();
+	void Reference();
+	void RandomEngine();
 
 	// 오버로딩 예제 함수
 	int GetSumValue(int a, int b);
@@ -22,4 +24,5 @@ private:
 	float GetAvr(int a, int b, int c) { return (a + b + c) / 3.0f; }
 
 	// 참조 예제 함수
+	void SwapByRef(int& ref1, int& ref2);
 };
