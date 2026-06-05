@@ -52,21 +52,120 @@ void Part02::RandomEngine()
 	random_device randomDevice;
 	mt19937 generator(randomDevice());
 
-	uniform_int_distribution<int> uniformIntDist(1, 100);
+	uniform_int_distribution<int> uniformIntDist(0, 99);
+	uniform_real_distribution<float> uniformRealDist(0.0f, 10.0f);
 
 	constexpr int len = 10;
 
 	int arr[len]{};
-
+	float fltArr[len]{};
 
 	for (int i = 0; i < len; ++i)
 	{
 		arr[i] = uniformIntDist(generator);
+		fltArr[i] = uniformRealDist(generator);
 	}
 
 	cout << "===== Á¤¼öÇü ¹è¿­ ¿ø¼Ò (±Õµî ºÐÆ÷) =====\n";
 	for (int i = 0; i < len; ++i)
 		cout << arr[i] << ", ";
+
+	cout << "\n\n===== ½Ç¼öÇü ¹è¿­ ¿ø¼Ò (±Õµî ºÐÆ÷) =====\n";
+	for (int i = 0; i < len; ++i)
+		cout << fltArr[i] << ", ";
+
+	int uniformGraph[100] = { 0 };
+
+	cout << "\n\n===== ±Õµî ºÐÆ÷ ±×·¡ÇÁ =====\n";
+	for (int i = 0; i < 1500; ++i)
+	{
+		int idx = uniformIntDist(generator);
+		++uniformGraph[idx];
+	}
+
+	for (int i = 0; i < 100; ++i)
+	{
+		cout << i << '\t';
+
+		for (int j = 0; j < uniformGraph[i]; ++j)
+			cout << '*';
+
+		cout << '\n';
+	}
+
+	normal_distribution<float> normalDist(50.0f, 7.0f);
+
+	int normalGraph[100] = { 0 };
+
+	cout << "\n\n===== Á¤±Ô ºÐÆ÷ ±×·¡ÇÁ =====\n";
+	for (int i = 0; i < 1500; ++i)
+	{
+		int idx = static_cast<int>(normalDist(generator));
+
+		if (idx >= 0 && idx < 100)
+			++normalGraph[idx];
+	}
+
+	for (int i = 0; i < 100; ++i)
+	{
+		cout << i << '\t';
+
+		for (int j = 0; j < normalGraph[i]; ++j)
+			cout << '*';
+
+		cout << '\n';
+	}
+
+	double winPercent = 0.0;
+
+	cout << "\nº£¸£´©ÀÌ ºÐÆ÷ ´çÃ· È®·ü ÀÔ·Â(0 ~ 100) : ";
+	cin >> winPercent;
+
+	if (winPercent < 0.0)
+		winPercent = 0.0;
+	if (winPercent > 100.0)
+		winPercent = 100.0;
+
+	int tryCount = 0;
+
+	cout << "½ÃÇà È½¼ö ÀÔ·Â(0 ÀÌ»ó) : ";
+	cin >> tryCount;
+
+	if (tryCount < 0)
+		tryCount = 0;
+
+	const double winProbability = winPercent / 100.0;
+
+	bernoulli_distribution bernoulliDist(winProbability);
+
+	int winCount = 0;
+
+	cout << "\n´çÃ· È®·ü ¼³Á¤°ª : " << winPercent << "%\n";
+	cout << "\n½ÃÇà È½¼ö : " << tryCount << "È¸\n\n";
+
+	cout << "===== ´çÃ· ¿©ºÎ (º£¸£´©ÀÌ ºÐÆ÷) =====\n";
+	for (int i = 0; i < tryCount; ++i)
+	{
+		cout << i + 1 << "È¸Â÷ : ";
+
+		if (bernoulliDist(generator))
+		{
+			cout << "´çÃ· µÇ¼Ì½À´Ï´Ù!\n";
+			++winCount;
+		}
+		else
+		{
+			cout << "²Î!\n";
+		}
+	}
+
+	const double actualWinPercent = static_cast<double>(winCount) / tryCount * 100.0;
+
+	cout << "\n===== °á°ú ¿ä¾à =====\n";
+	cout << "ÃÑ ½Ãµµ È½¼ö : " << tryCount << '\n';
+	cout << "´çÃ· È½¼ö : " << winCount << '\n';
+	cout << "²Î È½¼ö : " << tryCount - winCount << '\n';
+	cout << "½ÇÁ¦ ´çÃ· È®·ü : " << actualWinPercent << "%\n";
 }
 
 int Part02::GetSumValue(int a, int b)
