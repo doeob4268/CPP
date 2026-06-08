@@ -2,16 +2,14 @@
 
 class Player
 {
-public://扁瓷
-	Player(int id, int hp, int atk)
-		: id(id), hp(hp), atk(atk)
+public://加己
+	Player(int id, int hp, int atk);
 
-private://加己
+private://扁瓷
 	int hp = 0;
 	int atk = 0;
 
 	const int id;
-
 };
 
 class Part03
