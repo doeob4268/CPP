@@ -6,7 +6,7 @@ public:
 	Player() : Player(1, 0, 0) { cout << "Player() 생성자 실행 완료!\n"; }
 	Player(int id, int hp, int atk);
 
-	void Attack();
+	void Attack(Player& target); // 대상 추가
 
 	// Getter
 	int GetID() const { return id; }
