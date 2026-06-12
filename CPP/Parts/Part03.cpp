@@ -15,30 +15,42 @@ void Part03::Class()
 	cout << '\n';
 	Player player2(2, 50, 35);
 
-	cout << "===== 공격 전 =====\n";
+	cout << "\n===== 공격 전 =====\n";
 	cout << "player1 : " << player1.GetHP() << ", " << player1.GetATK() << '\n';
 	cout << "player2 : " << player2.GetHP() << ", " << player2.GetATK() << '\n';
 
-	player1.Attack(player2);// player1이 player2를 공격
+	player1.Attack(player2);
 
 	cout << "\n===== player1 공격 결과 =====\n";
 	cout << "player1 : " << player1.GetHP() << ", " << player1.GetATK() << '\n';
 	cout << "player2 : " << player2.GetHP() << ", " << player2.GetATK() << '\n';
 
-	player2.Attack(player1);// player2가 player1을 공격
+	player2.Attack(player1);
 
 	cout << "\n===== player2 공격 결과 =====\n";
 	cout << "player1 : " << player1.GetHP() << ", " << player1.GetATK() << '\n';
 	cout << "player2 : " << player2.GetHP() << ", " << player2.GetATK() << '\n';
+
+	cout << '\n';
+
+	*(player1.ptr) = 30;
 }
 
 Player::Player(int id, int hp, int atk)
 	: id(id), hp(hp), atk(atk)
 {
+	ptr = new int(15);
+
 	cout << "Player(int, int, int) 생성자 실행 완료!\n";
 }
-void Player::Attack(Player& target)
+
+Player::~Player()
 {
-	cout << "\nPlayer" << id << "이(가) Player" << target.GetID() << "을(를) 공격!\n";// 공격 메시지 출력
-	target.SetHP(target.GetHP() - atk);// 대상의 HP를 공격력만큼 감소
+	delete(ptr);
+	cout << "~Player() 소멸자 실행 완료!\n";
+}
+
+void Player::Attack(Player& otherPlayer)
+{
+	otherPlayer.hp -= atk;
 }
