@@ -5,6 +5,9 @@ class Player
 public:
 	Player() : Player(1, 0, 0) { cout << "Player() 생성자 실행 완료!\n"; }
 	Player(int id, int hp, int atk);
+	Player(const Player& other);
+
+	Player& operator=(const Player& other);
 
 	~Player();
 
@@ -18,12 +21,12 @@ public:
 	// Setter
 	void SetHP(int hp) { (*this).hp = hp; }
 	void SetATK(int atk) { this->atk = atk; }
-	int* ptr = nullptr;
 
 private:
 	int hp = 0;
 	int atk = 0;
 
+	int* ptr = nullptr;
 	int* arr = nullptr;
 
 	const int id;
