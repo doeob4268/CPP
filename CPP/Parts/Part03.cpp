@@ -64,7 +64,7 @@ Player::Player(const Player& other)
 	cout << "Player(const Player&) 복사생성자 실행 완료!\n";
 }
 
-Player& Player::operator=(const Player& other)
+Player& Player::operator=(const Player& other)//숙제
 {
 	hp = other.hp;
 	atk = other.atk;
