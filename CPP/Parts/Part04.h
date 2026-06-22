@@ -18,7 +18,11 @@ namespace Part04_Inheritance
 	class Derived : public Base
 	{
 	public:
+		Derived();
 		Derived(int num, float fltNum, const char* string);
+		~Derived();
+
+		void PrintInfo() const;
 
 	private:
 		char string[100] = "";
