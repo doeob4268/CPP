@@ -3,7 +3,8 @@
 
 Part04::Part04()
 {
-	Inheritance();
+	//Inheritance();
+	Polymorphsim();
 }
 
 void Part04::Inheritance()
@@ -17,7 +18,32 @@ void Part04::Inheritance()
 
 	Derived derived(3, 0.1f, "Hello, World!\n");
 	cout << '\n';
-	derived.PrintInfo();//파생 객체 -> 기반 객체 정보 + a(hello world) -> base(int, float) 생성자 실행 완료! 
+	derived.PrintInfo();//파생 객체 -> 기반 객체 정보 + @(hello world) -> base(int, float) 생성자 실행 완료! 
+	cout << '\n';
+
+	Base* baseDerived = new Derived(20, 6.28f, "Hello!");
+	cout << '\n';
+	baseDerived->PrintInfo();
+	cout << '\n';
+}
+
+void Part04::Polymorphsim()
+{
+	using namespace Part04_Polymorphism;
+
+	Base* base1 = new Base();
+	cout << '\n';
+	Base* base2 = new Derived();
+	cout << '\n';
+
+	base1->ShowInfo();
+	cout << '\n';
+	base2->ShowInfo();
+	cout << '\n';
+
+	SAFE_DELETE(base2);
+	cout << '\n';
+	SAFE_DELETE(base1);
 	cout << '\n';
 }
 
@@ -65,5 +91,18 @@ namespace Part04_Inheritance
 
 		cout << "===== 파생 객체 정보 =====\n";
 		cout << "String : " << string << '\n';
+	}
+}
+
+namespace Part04_Polymorphism
+{
+	void Base::ShowInfo()
+	{
+		cout << "Base::ShowInfo() 실행 완료!\n";
+	}
+
+	void Derived::ShowInfo()
+	{
+		cout << "Derived::ShowInfo() 실행 완료!\n";
 	}
 }
