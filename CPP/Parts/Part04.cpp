@@ -11,19 +11,22 @@ void Part04::Inheritance()
 {
 	using namespace Part04_Inheritance;
 
-	Base base(10, 3.14f);//객체 생성 -> Base(int, float) 생성자 실행 완료! 출력
+	Base base(10, 3.14f);
 	cout << '\n';
-	base.PrintInfo();//기반 객체 정보 출력
+	base.PrintInfo();
 	cout << '\n';
 
-	Derived derived(3, 0.1f, "Hello, World!\n");
+	Derived derived(3, 0.1f, "Hello, World!");
 	cout << '\n';
-	derived.PrintInfo();//파생 객체 -> 기반 객체 정보 + @(hello world) -> base(int, float) 생성자 실행 완료! 
+	derived.PrintInfo();
 	cout << '\n';
 
 	Base* baseDerived = new Derived(20, 6.28f, "Hello!");
 	cout << '\n';
 	baseDerived->PrintInfo();
+	cout << '\n';
+
+	SAFE_DELETE(baseDerived);
 	cout << '\n';
 }
 
@@ -33,14 +36,25 @@ void Part04::Polymorphsim()
 
 	Base* base1 = new Base();
 	cout << '\n';
-	Base* base2 = new Derived();
+	Base* base2 = new SubDerived();
 	cout << '\n';
+
+	Derived* derived1 = new SubDerived();
+	cout << '\n';
+	Derived* derived2 = dynamic_cast<Derived*>(base2);
+	assert(derived2 != nullptr);
 
 	base1->ShowInfo();
 	cout << '\n';
 	base2->ShowInfo();
 	cout << '\n';
+	derived1->ShowInfo();
+	cout << '\n';
+	derived2->ShowInfo();
+	cout << '\n';
 
+	SAFE_DELETE(derived1);
+	cout << '\n';
 	SAFE_DELETE(base2);
 	cout << '\n';
 	SAFE_DELETE(base1);
@@ -57,7 +71,7 @@ namespace Part04_Inheritance
 
 	Base::~Base()
 	{
-		cout << "~Base() 소멸자 실행 완료!\n";//함수가 끝나서 소멸자 실행 완료 -> 2번째로 출력 (derived함수) -> 3번쨰로	출력 (base함수)
+		cout << "~Base() 소멸자 실행 완료!\n";
 	}
 
 	void Base::PrintInfo() const
@@ -82,7 +96,7 @@ namespace Part04_Inheritance
 
 	Derived::~Derived()
 	{
-		cout << "~Derived() 소멸자 실행 완료!\n"; //함수가 끝나서 소멸자 실행 완료 -> 소멸자중에서 제일 먼저 출력
+		cout << "~Derived() 소멸자 실행 완료!\n";
 	}
 
 	void Derived::PrintInfo() const
@@ -104,5 +118,11 @@ namespace Part04_Polymorphism
 	void Derived::ShowInfo()
 	{
 		cout << "Derived::ShowInfo() 실행 완료!\n";
+		this->DoShowInfo();
+	}
+
+	void SubDerived::DoShowInfo()
+	{
+		cout << "SubDerived::DoShowInfo() 실행 완료!\n";
 	}
 }

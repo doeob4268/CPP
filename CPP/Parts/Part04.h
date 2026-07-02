@@ -44,7 +44,7 @@ namespace Part04_Polymorphism
 	{
 	public:
 		Derived() { cout << "Derived() 생성자 실행 완료!\n"; }
-		~Derived() override{ cout << "~Derived() 소멸자 실행 완료!\n"; }
+		~Derived() override { cout << "~Derived() 소멸자 실행 완료!\n"; }
 
 		void ShowInfo() override;
 
@@ -55,14 +55,21 @@ namespace Part04_Polymorphism
 	class SubDerived final : public Derived
 	{
 	public:
-		SubDerived() { cout << "SubDerived() 생성자 실행 완료 !\n"; }
-		~SubDerived() override { cout << "~SubDerived() 소멸자 실행 완료 !\n"; }
-	
+		SubDerived() { cout << "SubDerived() 생성자 실행 완료!\n"; }
+		~SubDerived() override { cout << "~SubDerived() 소멸자 실행 완료!\n"; }
+
+	protected:
+		void DoShowInfo() override;
+
 	private:
 		int val = 0;
 	};
-}
 
+	class A : public SubDerived
+	{
+
+	};
+}
 
 class Part04
 {
