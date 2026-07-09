@@ -53,6 +53,14 @@ void Part04::Polymorphsim()
 	derived2->ShowInfo();
 	cout << '\n';
 
+	cout << "GetSumValue : " << dynamic_cast<SubDerived*>(derived1)->GetSumValue(*dynamic_cast<SubDerived*>(base2), *dynamic_cast<SubDerived*>(derived1));
+	cout << '\n';
+
+	short num = 10;
+	//int* ptr = (int*)&num;
+	int* ptr = static_cast<int*>(&num);
+	*ptr = 20;
+
 	SAFE_DELETE(derived1);
 	cout << '\n';
 	SAFE_DELETE(base2);
@@ -110,18 +118,23 @@ namespace Part04_Inheritance
 
 namespace Part04_Polymorphism
 {
-	void Base::ShowInfo()
+	void Base::ShowInfo() const
 	{
 		cout << "Base::ShowInfo() 실행 완료!\n";
 	}
 
-	void Derived::ShowInfo()
+	void Derived::ShowInfo() const
 	{
 		cout << "Derived::ShowInfo() 실행 완료!\n";
 		this->DoShowInfo();
 	}
 
-	void SubDerived::DoShowInfo()
+	int SubDerived::GetSumValue(const SubDerived& a, SubDerived& b)
+	{
+		return a.GetValue() + b.GetValue();
+	}
+
+	void SubDerived::DoShowInfo() const
 	{
 		cout << "SubDerived::DoShowInfo() 실행 완료!\n";
 	}

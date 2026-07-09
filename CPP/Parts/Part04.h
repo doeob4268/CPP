@@ -37,7 +37,7 @@ namespace Part04_Polymorphism
 		Base() { cout << "Base() 생성자 실행 완료!\n"; }
 		virtual ~Base() { cout << "~Base() 소멸자 실행 완료!\n"; }
 
-		virtual void ShowInfo();
+		virtual void ShowInfo() const;
 	};
 
 	class Derived : public Base
@@ -46,10 +46,10 @@ namespace Part04_Polymorphism
 		Derived() { cout << "Derived() 생성자 실행 완료!\n"; }
 		~Derived() override { cout << "~Derived() 소멸자 실행 완료!\n"; }
 
-		void ShowInfo() override;
+		void ShowInfo() const override;
 
 	protected:
-		virtual void DoShowInfo() = 0;
+		virtual void DoShowInfo() const = 0;
 	};
 
 	class SubDerived final : public Derived
@@ -58,16 +58,18 @@ namespace Part04_Polymorphism
 		SubDerived() { cout << "SubDerived() 생성자 실행 완료!\n"; }
 		~SubDerived() override { cout << "~SubDerived() 소멸자 실행 완료!\n"; }
 
+		int GetValue() const { const_cast<SubDerived*>(this)->val = 20; return val; }//const_cast = const때문에 값을 못바꿀때 const_cast로 바꾼다 *과도하게 쓰지 말것*
+		int GetValue() { val = 10;  return val; }
+
+		int GetSumValue(const SubDerived& a, SubDerived& b);
+
+		void SetValue(int val) { this->val = val; }
+
 	protected:
-		void DoShowInfo() override;
+		void DoShowInfo() const override;
 
 	private:
 		int val = 0;
-	};
-
-	class A : public SubDerived
-	{
-
 	};
 }
 
