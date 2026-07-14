@@ -42,7 +42,7 @@ void Part04::Polymorphsim()
 	Derived* derived1 = new SubDerived();
 	cout << '\n';
 	Derived* derived2 = dynamic_cast<Derived*>(base2);
-	assert(derived2 != nullptr);
+	assert(derived2 != nullptr);//문제 발생시 미리 nullptr로 발견하는 코드
 
 	base1->ShowInfo();
 	cout << '\n';
@@ -53,13 +53,8 @@ void Part04::Polymorphsim()
 	derived2->ShowInfo();
 	cout << '\n';
 
-	cout << "GetSumValue : " << dynamic_cast<SubDerived*>(derived1)->GetSumValue(*dynamic_cast<SubDerived*>(base2), *dynamic_cast<SubDerived*>(derived1));
-	cout << '\n';
-
-	short num = 10;
-	//int* ptr = (int*)&num;
-	int* ptr = static_cast<int*>(&num);
-	*ptr = 20;
+	cout << "GetSumValue : " << static_cast<SubDerived*>(derived1)->GetSumValue(*dynamic_cast<SubDerived*>(base2), *dynamic_cast<SubDerived*>(derived1));//dynamic_cast는 느리려서 static_cast를 써주면 좋다
+	cout << "\n\n";
 
 	SAFE_DELETE(derived1);
 	cout << '\n';
