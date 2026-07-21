@@ -45,38 +45,45 @@ namespace Part05_ArrayList
 	ArrayList& ArrayList::operator=(const ArrayList& other)
 	{
 		// TODO: 여기에 return 문을 삽입합니다.
-		
+
 		ArrayList push_back(10); // 초기 용량을 10으로 설정
 		ArrayList arr1(10); 
-		for (int i = 0; i < 10; ++i) 
-			arr1.push_back(i + 1); 
-
-		return *this; 
-
+		for (int i = 0; i < 10; ++i)
+		{
+			cout << arr[i] << endl;
+		}
+	
+		return; 
 	}
 
 	ArrayList& ArrayList::operator=(ArrayList&& other) noexcept
 	{
 		// TODO: 여기에 return 문을 삽입합니다.
+
 	}
 
 	ArrayList::ArrayList(size_t capacity)
 	{
+
 	}
 
 	ArrayList::ArrayList(const ArrayList& other)
 	{
+
 	}
 
 	ArrayList::ArrayList(ArrayList&& other) noexcept
 	{
+
 	}
 
 	ArrayList::~ArrayList()
 	{
+
 	}
 
 	void ArrayList::push_back(int value)
 	{
+
 	}
 }

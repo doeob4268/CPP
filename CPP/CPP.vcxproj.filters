@@ -9,6 +9,15 @@
     <ClCompile Include="Parts\Part02.cpp">
       <Filter>Parts</Filter>
     </ClCompile>
+    <ClCompile Include="Parts\Part05.cpp">
+      <Filter>Parts</Filter>
+    </ClCompile>
+    <ClCompile Include="Parts\Part04.cpp">
+      <Filter>Parts</Filter>
+    </ClCompile>
+    <ClCompile Include="Parts\Part03.cpp">
+      <Filter>Parts</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -16,7 +25,16 @@
       <Filter>Parts</Filter>
     </ClInclude>
     <ClInclude Include="Parts\PartList.h" />
-    <ClInclude Include="Part02.h">
+    <ClInclude Include="Parts\Part05.h">
+      <Filter>Parts</Filter>
+    </ClInclude>
+    <ClInclude Include="Parts\Part04.h">
+      <Filter>Parts</Filter>
+    </ClInclude>
+    <ClInclude Include="Parts\Part03.h">
+      <Filter>Parts</Filter>
+    </ClInclude>
+    <ClInclude Include="Parts\Part02.h">
       <Filter>Parts</Filter>
     </ClInclude>
   </ItemGroup>

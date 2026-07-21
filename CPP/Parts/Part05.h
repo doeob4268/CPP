@@ -8,16 +8,19 @@ namespace Part05_ArrayList
 		// ===== 연산자 오버로딩 =====
 		// 복사 대입
 		ArrayList& operator=(const ArrayList& other);
+		
 		// 이동 대입
 		ArrayList& operator=(ArrayList&& other) noexcept;
-
+		
 		// ===== 자원 관리 =====
 		// 생성자
 		explicit ArrayList(size_t capacity = 0);
 		// 복사 생성자
 		ArrayList(const ArrayList& other);
+		
 		// 이동 생성자
 		ArrayList(ArrayList&& other) noexcept;
+		
 		// 소멸자
 		~ArrayList();
 
