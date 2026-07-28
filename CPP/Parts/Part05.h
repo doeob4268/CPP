@@ -24,6 +24,14 @@ namespace Part05_ArrayList
 		// 이동 대입: 기존 자원 반납 후, other의 자원을 그대로 가져오고 other는 비움
 		ArrayList& operator=(ArrayList&& other) noexcept;
 		
+		int& operator[](size_t index);//int형을 반환해야함, 배열처럼 동작할수있게
+
+		const int& operator[](size_t index) const;
+
+		ArrayList& operator++();
+
+		ArrayList operator++(int);
+
 		// ===== 컨테이너 제어 =====
 		int* data() { return arr; }//내부 원소를 수정할수있게, const는 수정할수없게
 		const int* data() const {}
@@ -31,11 +39,14 @@ namespace Part05_ArrayList
 		size_t capacity() const { return cap; }
 		size_t size() const { return numElements; }
 
+		bool empty() const { return numElements == 0; }
+
 		void reserve(size_t newCapacity);
 
 		// 데이터 추가
 		void push_back(int value);//push_back 제일 끝에다 값을 넣는다
 
+		void Print() const;
 	private:
 		static size_t CalculateGrowth(size_t currntCapacity);
 
@@ -43,6 +54,8 @@ namespace Part05_ArrayList
 		size_t numElements = 0;
 		int* arr = nullptr;
 	};
+
+	ostream& operator<<(ostream& stream, const ArrayList& arr);//class 밖에서 오버로딩 해줘야함
 }
 
 class Part05
