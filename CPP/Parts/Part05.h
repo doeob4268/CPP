@@ -55,3 +55,6 @@ public:
 private:
 	void PrintArray(int* arr, size_t size);
 };
+//stack : 지역변수, 함수호출시 생성, 함수종료시 소멸
+//heap : new로 생성, delete로 소멸, 프로그램 종료시까지 유지 (delete를 안하면 메모리 누수 발생)
+//댕글링포인터 : 이미 해제된 메모리를 가리키는 포인터, 사용시 프로그램이 비정상 종료될 수 있음 (nullptr로 초기화해서 방지)

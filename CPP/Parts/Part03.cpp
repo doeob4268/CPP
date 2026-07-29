@@ -10,35 +10,35 @@ Part03::Part03()
 
 void Part03::Class()
 {
-	Player player1;
+	Player player1;//player생성자에서 player1 객체 생성 (매개변수가 없으므로 기본생성자)
 	player1.SetHP(100);
 	player1.SetATK(15);
 
 	cout << '\n';
-	Player player2(2, 50, 35);
+	Player player2(2, 50, 35);//player2생성 (매개변수가 int int int형식이므로 intintint생성자)
 
 	cout << '\n';
 	Player player3(3, 0, 0);
 	cout << '\n';
-	player3 = player2;
+	player3 = player2;//이건 생성자가 아님 새로 만드는게 아닌 이미 있는 객체에 값을 덮어쓰는 것
 
 	cout << "\n===== 공격 전 =====\n";
-	cout << "player1 : " << player1.GetHP() << ", " << player1.GetATK() << '\n';
-	cout << "player2 : " << player2.GetHP() << ", " << player2.GetATK() << '\n';
-	cout << "player3 : " << player3.GetHP() << ", " << player3.GetATK() << '\n';
+	cout << "player1 : " << player1.GetHP() << ", " << player1.GetATK() << '\n';//1, 100, 15
+	cout << "player2 : " << player2.GetHP() << ", " << player2.GetATK() << '\n';//2, 50, 35
+	cout << "player3 : " << player3.GetHP() << ", " << player3.GetATK() << '\n';//3, 50, 35
 
-	player1.Attack(player2);
+	player1.Attack(player2);//player1이 player2 공격 (player2.hp -= atk; <-player1)
 
 	cout << "\n===== player1 공격 결과 =====\n";
 	cout << "player1 : " << player1.GetHP() << ", " << player1.GetATK() << '\n';
-	cout << "player2 : " << player2.GetHP() << ", " << player2.GetATK() << '\n';
+	cout << "player2 : " << player2.GetHP() << ", " << player2.GetATK() << '\n';//체력 35
 	cout << "player3 : " << player3.GetHP() << ", " << player3.GetATK() << '\n';
 
-	player2.Attack(player1);
+	player2.Attack(player1);//반대로
 
 	cout << "\n===== player2 공격 결과 =====\n";
-	cout << "player1 : " << player1.GetHP() << ", " << player1.GetATK() << '\n';
-	cout << "player2 : " << player2.GetHP() << ", " << player2.GetATK() << '\n';
+	cout << "player1 : " << player1.GetHP() << ", " << player1.GetATK() << '\n';//체력 65
+	cout << "player2 : " << player2.GetHP() << ", " << player2.GetATK() << '\n';//체력 35 유지
 	cout << "player3 : " << player3.GetHP() << ", " << player3.GetATK() << '\n';
 
 	cout << '\n';
@@ -140,3 +140,30 @@ void Player::Attack(Player& otherPlayer)
 {
 	otherPlayer.hp -= atk;
 }
+//Player(int, int, int) 생성자 실행 완료!
+//Player() 생성자 실행 완료!
+//
+//Player(int, int, int) 생성자 실행 완료!
+//
+//Player(int, int, int) 생성자 실행 완료!
+//
+//operator=(const Player&) 복사대입연산자 실행 완료!
+//
+//==== = 공격 전 ==== =
+//player1 : 100, 15
+//player2 : 50, 35
+//player3 : 50, 35
+//
+//==== = player1 공격 결과 ==== =
+//player1 : 100, 15
+//player2 : 35, 35
+//player3 : 50, 35
+//
+//==== = player2 공격 결과 ==== =
+//player1 : 65, 15
+//player2 : 35, 35
+//player3 : 50, 35
+//
+//~Player() 소멸자 실행 완료!
+//~Player() 소멸자 실행 완료!
+//~Player() 소멸자 실행 완료!
