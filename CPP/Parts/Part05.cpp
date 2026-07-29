@@ -34,6 +34,30 @@ void Part05::ArrayListClass()
 	PrintArray(arr3.data(), arr3.size());
 
 	cout << '\n';
+
+	ArrayList arr;
+	//vector<int> arr;//ÅÛÇÃ¸´À» »ç¿ëÇÔ
+
+	constexpr int capacity = 10;
+
+	arr.reserve(capacity);//reserve¸¦ ¾ÈÇÏ¸é Ä³ÆÛ½ºÆ¼°¡ ºÎÁ·ÇÒ¶§¸¶´Ù ÀÌ»ç¸¦ °è¼Ó°¨, ¹«ÅÎ´ë°í push_back ¸· ¾²Áö¸»°í ¼ýÀÚ°¡ ¹Ù²ð¼öµµ ÀÖÀ¸´Ï±ñ reserve »ç¿ëÇÏ±â
+
+	for (int i = 0; i < capacity
+		; ++i)
+		arr.push_back(i + 1);
+
+
+	for (size_t i = 0; i < arr.size(); ++i)
+		arr[i] *= 10;//¸Þ¸ð¸®»ó¿¡ Á¸ÀçÇÏ¸é lvalue
+
+	cout << "\n===== ¹è¿­ ¸®½ºÆ® ¿ø¼Ò =====\n";
+	//PrintArray(arr.data(), arr.size());
+	arr.Print();
+
+	//cout << arr;
+
+	cout << '\n';
+
 }
 
 void Part05::PrintArray(int* arr, size_t size)
@@ -79,8 +103,8 @@ namespace Part05_ArrayList//¾èÀº º¹»ç·Î ÀÎÇØ arr1, arr2, arr3°¡ °°Àº Èü °ø°£À» ¹
 
 	ArrayList::ArrayList(ArrayList&& other) noexcept// ÀÌµ¿ »ý¼ºÀÚ : otherÀÇ ÀÚ¿øÀ» ±×´ë·Î °¡Á®¿À°í other´Â ºñ¿ò
 		:cap(exchange(other.cap, 0))//±³È¯ÇÏ¸é¼­ µ¿½Ã¿¡ ty¹ë·ù°ª ¸®ÅÏ, other.cap 0À¸·Î ¹Ù²Ù¸é¼­ ¿ø·¡ÀÇ °ªÀº ¸®ÅÏ
-		,numElements(exchange(other.numElements, 0))
-		,arr(exchange(other.arr, nullptr))
+		, numElements(exchange(other.numElements, 0))
+		, arr(exchange(other.arr, nullptr))
 	{
 		cout << "ArrayList ÀÌµ¿ »ý¼ºÀÚ ½ÇÇà ¿Ï·á!\n";
 	}
@@ -106,6 +130,31 @@ namespace Part05_ArrayList//¾èÀº º¹»ç·Î ÀÎÇØ arr1, arr2, arr3°¡ °°Àº Èü °ø°£À» ¹
 		return *this;
 	}
 
+	int& ArrayList::operator[](size_t index)
+	{
+		assert(index < numElements && "ArrayList index out of range");
+
+		return arr[index];
+	}
+
+	// ÀüÀ§ Áõ°¡ ¿¬»êÀÚ
+	ArrayList& ArrayList::operator++()//´õÇÏ°í Ãâ·Â
+	{
+		cout << "ÀüÀ§ Áõ°¡ ¿¬»êÀÚ\n";
+
+		for (int i = 0; i < numElements + 1; ++i) { cout << numElements; }
+			
+		return [numElements];
+	}
+
+	//ÈÄÀ§ Áõ°¡ ¿¬»êÀÚ
+	ArrayList ArrayList::operator++(int)//Ãâ·ÂÇÏ°í ´õÇÏ±â
+	{
+		cout << "ÈÄÀ§ Áõ°¡ ¿¬»êÀÚ\n";
+		cout << numElements;
+		for (int i = 0; i < numElements + 1; ++i) { numElements; }
+	}
+
 	ArrayList& ArrayList::operator=(ArrayList&& other) noexcept// ÀÌµ¿ ´ëÀÔ: ±âÁ¸ ÀÚ¿ø ¹Ý³³ ÈÄ, otherÀÇ ÀÚ¿øÀ» ±×´ë·Î °¡Á®¿À°í other´Â ºñ¿ò
 	{
 		if (this == &other) return *this;
@@ -118,6 +167,7 @@ namespace Part05_ArrayList//¾èÀº º¹»ç·Î ÀÎÇØ arr1, arr2, arr3°¡ °°Àº Èü °ø°£À» ¹
 
 		return *this;
 	}
+
 	void ArrayList::reserve(size_t newCapacity)
 	{
 		if (newCapacity <= cap) return;
@@ -143,6 +193,11 @@ namespace Part05_ArrayList//¾èÀº º¹»ç·Î ÀÎÇØ arr1, arr2, arr3°¡ °°Àº Èü °ø°£À» ¹
 
 	}
 
+	void ArrayList::Print() const		  //* º¹½À *
+	{									  //* º¹½À *
+		cout << *this << '\n';			  //* º¹½À *
+	}
+
 	size_t ArrayList::CalculateGrowth(size_t currntCapacity)
 	{
 		if (currntCapacity == 0) return 1;
@@ -155,6 +210,24 @@ namespace Part05_ArrayList//¾èÀº º¹»ç·Î ÀÎÇØ arr1, arr2, arr3°¡ °°Àº Èü °ø°£À» ¹
 		return currntCapacity * 2;
 	}
 
+	ostream& operator<<(ostream& stream, const ArrayList& arr)
+	{
+		if (arr.empty())
+		{
+			stream << "(empty)";
+			return stream;
+		}
+
+			for (size_t i = 0; i < arr.size(); ++i)
+			{
+				stream << arr[i];
+
+				if (i + 1 < arr.size())
+					stream << ", ";
+			}
+
+		return stream;
+	}
 }
 //ArrayList »ý¼ºÀÚ ½ÇÇà ¿Ï·á! <- arr1 (ArrayList arr1;)
 //ArrayList º¹»ç»ý¼ºÀÚ ½ÇÇà ¿Ï·á! <- arr2 (ArrayList arr2(arr1);)
