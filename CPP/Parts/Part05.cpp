@@ -142,17 +142,16 @@ namespace Part05_ArrayList//얕은 복사로 인해 arr1, arr2, arr3가 같은 힙 공간을 �
 	{
 		cout << "전위 증가 연산자\n";
 
-		for (int i = 0; i < numElements + 1; ++i) { cout << numElements; }
+		++numElements;
 			
-		return [numElements];
+		return *this;// 증가된 자기 자신을 반환해서 반환값도 이미 증가된 상태를 보여줌.
 	}
 
 	//후위 증가 연산자
 	ArrayList ArrayList::operator++(int)//출력하고 더하기
 	{
 		cout << "후위 증가 연산자\n";
-		cout << numElements;
-		for (int i = 0; i < numElements + 1; ++i) { numElements; }
+		numElements++;
 	}
 
 	ArrayList& ArrayList::operator=(ArrayList&& other) noexcept// 이동 대입: 기존 자원 반납 후, other의 자원을 그대로 가져오고 other는 비움
