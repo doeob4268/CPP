@@ -5,3 +5,4 @@
 #include "Part03.h"
 #include "Part04.h"
 #include "Part05.h"
+#include "Part06.h"

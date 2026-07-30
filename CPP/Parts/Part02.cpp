@@ -21,7 +21,7 @@ void Part02::Overloading()
 
 void Part02::Reference()
 {
-	int val = 0;
+	int val = 0; //val 변수를 만들어 0으로 초기화를 시키고 *ptr포인터에 val가르키게 하고 *ptr에 10 대입 (c Part09에서 했던거)
 	int* ptr = &val;
 	*ptr = 10;
 

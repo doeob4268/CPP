@@ -7,7 +7,8 @@ int main()
 	//Part02 part02;
 	//Part03 part03;
 	//Part04 part04;
-	Part05 part05;
+	//Part05 part05;
+	Part06 part06;
 
 
 	cout << '\n';
