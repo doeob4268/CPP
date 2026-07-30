@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Part06.cpp" />
     <ClCompile Include="Parts\Part05.cpp" />
     <ClCompile Include="Parts\Part03.cpp" />
     <ClCompile Include="Parts\Part02.cpp" />
@@ -33,6 +34,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Part06.h" />
     <ClInclude Include="Parts\Part05.h" />
     <ClInclude Include="Parts\Part02.h" />
     <ClInclude Include="Parts\Part03.h" />

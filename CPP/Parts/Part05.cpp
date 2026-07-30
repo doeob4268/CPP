@@ -55,7 +55,11 @@ void Part05::ArrayListClass()
 	arr.Print();
 
 	//cout << arr;
+	cout << "\n===== 배열 리스트 원소(후위)";
+	cout << arr++ << '\n';
 
+	cout << "\n===== 배열 리스트 원소(전위)";
+	cout << ++arr << '\n';
 	cout << '\n';
 
 }
