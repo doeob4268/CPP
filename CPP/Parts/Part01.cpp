@@ -11,7 +11,6 @@ Part01::Part01()
 void Part01::IOStream()
 {
 	cout << "Hello, World!\n";
-
 	cout << "Int: " << num << ", Float: " << fltNum << '\n';
 
 	cout << "\n데이터 입력 (정수) : ";
