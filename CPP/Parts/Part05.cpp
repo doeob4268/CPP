@@ -137,21 +137,23 @@ namespace Part05_ArrayList//얕은 복사로 인해 arr1, arr2, arr3가 같은 힙 공간을 �
 		return arr[index];
 	}
 
-	// 전위 증가 연산자
+	// 전위 증가 연산자 //원소의 값
 	ArrayList& ArrayList::operator++()//더하고 출력
-	{
-		cout << "전위 증가 연산자\n";
+	{//&  lvalue : 계속 남아있고 참조를 한다
+		for (size_t i = 0; i < numElements; ++i)
+			++arr[i];
 
-		++numElements;
-			
-		return *this;// 증가된 자기 자신을 반환해서 반환값도 이미 증가된 상태를 보여줌.
+		return *this;//&로 받는 이유는
 	}
 
 	//후위 증가 연산자
 	ArrayList ArrayList::operator++(int)//출력하고 더하기
-	{
-		cout << "후위 증가 연산자\n";
-		numElements++;
+	{// rvalue
+		ArrayList temp(*this);
+
+		++(*this);
+
+		return temp;//temp는 이 함수에서 만든 객체여서 함수가 끝나면 사라짐
 	}
 
 	ArrayList& ArrayList::operator=(ArrayList&& other) noexcept// 이동 대입: 기존 자원 반납 후, other의 자원을 그대로 가져오고 other는 비움
