@@ -7,8 +7,8 @@ Part04::Part04()
 	Polymorphsim();
 }
 
-void Part04::Inheritance()
-{
+void Part04::Inheritance()//상속은 부모클래스의 속성을 자식클래스에 물려받는 내용인데 예로들면 코끼리는 자식 동물은 부모라고 가정하면 코끼리는 동물에 속하니깐 코끼리가 동물을 물려받는다로 생각하면 쉽다
+{							//사용하면 코드의 재사용성이랑 유지보수성도 늘릴수있다 하지만 너무 많이 상속하면 복잡해질수도있음
 	using namespace Part04_Inheritance;
 
 	Base base(10, 3.14f);
@@ -16,11 +16,11 @@ void Part04::Inheritance()
 	base.PrintInfo();
 	cout << '\n';
 
-	Derived derived(3, 0.1f, "Hello, World!");
-	cout << '\n';
-	derived.PrintInfo();
-	cout << '\n';
-
+	Derived derived(3, 0.1f, "Hello, World!"); //base는 int flt 인 매개변수밖에 없는데 derived는 + string까지 있어서 더 큰 범위다
+	cout << '\n';								//class Derived : public Base 헤더에 써있는건 derived클래스는 base에 상속받는다 라는 뜻인데 
+	derived.PrintInfo();						//derived가 범위가 더 큰데 왜 상속을 받는거지? <--  생각 해보니깐 
+	cout << '\n';								//base는 int flt고 derived는 +@ 인거니깐 전체적으로 보면 동물이 base 거기에 뿔달린 동물은 derived이런식이이여서 상속을 받는거같음
+												
 	Base* baseDerived = new Derived(20, 6.28f, "Hello!");
 	cout << '\n';
 	baseDerived->PrintInfo();
