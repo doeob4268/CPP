@@ -3,7 +3,7 @@
 
 Part04::Part04()
 {
-	Inheritance();
+	//Inheritance();
 	Polymorphsim();
 }
 
@@ -19,8 +19,8 @@ void Part04::Inheritance()//상속은 부모클래스의 속성을 자식클래스에 물려받는 내�
 	Derived derived(3, 0.1f, "Hello, World!"); //base는 int flt 인 매개변수밖에 없는데 derived는 + string까지 있어서 더 큰 범위다
 	cout << '\n';								//class Derived : public Base 헤더에 써있는건 derived클래스는 base에 상속받는다 라는 뜻인데 
 	derived.PrintInfo();						//derived가 범위가 더 큰데 왜 상속을 받는거지? <--  생각 해보니깐 
-	cout << '\n';								//base는 int flt고 derived는 +@ 인거니깐 전체적으로 보면 동물이 base 거기에 뿔달린 동물은 derived이런식이이여서 상속을 받는거같음
-												
+	cout << '\n';								//base는 int flt고 derived는 +@ 인거니깐 전체적으로
+	//보면 동물이 base 거기에 뿔달린 동물은 derived 이런식이이여서 상속을 받는거같음 그래서 derived.PrintInfo();하면 base의 PrintInfo()도 같이 실행되는거임									
 	Base* baseDerived = new Derived(20, 6.28f, "Hello!");
 	cout << '\n';
 	baseDerived->PrintInfo();
@@ -36,7 +36,7 @@ void Part04::Polymorphsim()
 
 	Base* base1 = new Base();
 	cout << '\n';
-	Base* base2 = new SubDerived();
+	Base* base2 = new SubDerived();//이것도 SubDerived가 Derived를 상속받고 Derived가 Base를 상속받으니깐 출력에 Derived 생성자 까지 같이 출력됨 
 	cout << '\n';
 
 	Derived* derived1 = new SubDerived();
@@ -44,7 +44,7 @@ void Part04::Polymorphsim()
 	Derived* derived2 = dynamic_cast<Derived*>(base2);
 	assert(derived2 != nullptr);//문제 발생시 미리 nullptr로 발견하는 코드
 
-	base1->ShowInfo();
+	base1->ShowInfo();//base1이 new Base()로 주소를 가리키고 있으니깐 Base::ShowInfo() 실행 완료! 출력하고 .이 아니라 ->를 쓰는 이유는 base1이 포인터이기 때문에 .을 쓰면 안됨
 	cout << '\n';
 	base2->ShowInfo();
 	cout << '\n';
