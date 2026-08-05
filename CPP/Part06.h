@@ -39,13 +39,14 @@ namespace Part06_Singleton//유일한 객체 하나만 만드는 것, 게임업계에서 많이 쓰임
 		//}
 		static DataManager* Get();
 
-		static void Destroy() noexcept;
-		static void AddData()noexcept;
-		static void RemoveData()noexcept;
+		static void Destroy() noexcept;//noexcept는 런타임에서 오류가 발생 시키지 않겠다는 의미
+		 void AddData()noexcept;
+		 void RemoveData()noexcept;
+		bool Contains(); //존재 확인은 예 아니오로 할수있게 bool로 반환
 
 		// 데이터 추가 함수 (AddData)
 		// 데이터 삭제 함수 (RemoveData)
-		// 데이터 존재 확인 함수 (Contains)
+		//// 데이터 존재 확인 함수 (Contains)
 		// 저장된 데이터 개수 반환 함수 (Size)
 		// 비었는지 확인하는 함수 (Empty)
 		// 싱글턴 객체는 유지하면서 내부 데이터만 제거하는 함수 (Clear)
@@ -67,8 +68,8 @@ namespace Part06_Singleton//유일한 객체 하나만 만드는 것, 게임업계에서 많이 쓰임
 		// 멤버변수
 		static constexpr size_t MAX_DATA_COUNT = 100;//스태틱 붙으면 정적멤버, 선언할때 초기화가 되야하기 때문에 여기서 초기화가 된다
 
-		Data datas[MAX_DATA_COUNT]{};
-		size_t numDatas = 0;
+		Data datas[MAX_DATA_COUNT]{};// 데이터를 담을 배열 /Data : 구조체 이름(id value fltValue), datas : 변수 이름 (Data들을 담아놓는 보관함 이름) , MAX_DATA_COUNT : 배열의 크기(100개 까지 담는다고 위에 코드에서 써둠)
+		size_t numDatas = 0; // 현재 저장된 데이터 개수
 		
 		static DataManager* instance;//포인터는 그냥 주소값이기 때문에 가능함
 	};

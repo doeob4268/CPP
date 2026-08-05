@@ -61,14 +61,28 @@ namespace Part06_Singleton
 	void DataManager::AddData() noexcept
 	{
 		cout << "데이터 추가하기";
-		int NewData;
-		cin >> new Data
-	}
+		numDatas++;//이것만 쓰려고했는데 비정적 멤버를 참조하려면 특정 개체가 필요합니다.라고 떠서 객체를 만들어서 참조를 해야된다
+	}//근데 static를 뺴니깐 작동했는데 static이 클래스에 속하는 객체를 공유하는 멤버라서 객체를 만들지 않아도 접근이 가능하다, 근데 비정적 멤버는 특정 객체에 속하는 멤버라서 객체를 만들어야 접근이 가능하다
 	void DataManager::RemoveData() noexcept
 	{
 		cout << "데이터 삭제하기";
+	
+		numDatas--; //추가에서 하나 늘렸으면 삭제하기에서 하나 줄여야한다 이것도 마찬가지로 static를 뺴니깐 작동했는데 static을 뺴니깐 오류가 사라졌다
+		if (numDatas < 0)//근데 0보다 작아지면 안되기 때문에 0보다 작으면 0으로 초기화 시켜준다
+		{
+			numDatas = 0;
+		}
+	}
+	bool DataManager::Contains()
+	{
+		cout << "데이터 존재 확인";
 
-		SAFE_DELETE();
+		if (numDatas == 0) //numDatas는 객체가 가지고있는 데이터인데 그게 존재하지 않으면 false를 반환하고 아니면 true를 반환한다
+		{
+			cout << "데이터가 존재하지 않습니다.";
+			return false;
+		}
+		return true;
 	}
 
 	int DataManager::FindIndex(const string& id) const noexcept
