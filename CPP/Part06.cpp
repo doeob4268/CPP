@@ -40,8 +40,8 @@ void Part06::Singleton()
 	// 만든 기능들을 전부 1회 이상 활용해보는 예제 직접 만들어보기
 
 	DataManager::Destroy();
-	DataManager::AddData();
-}
+	DataManager::AddData();//비정적 멤버를 참조하려면 특정 개체가 필요합니다가 아래에서 static을 뺴니깐 작동했는데 static을 뺴서 오류가 사라졌는데 이건 같은 오류인데 static을 뺴니깐 오류가 사라졌다, static 뺴도 오류가 안사라진다
+}//removeData는 이거를 안써도 되는데 아마도 static 유무 차이떄문에 오류가 생기는거같다 <- 스태틱을 쓰면 AddData를 호출할때 객체가 다같이 공유되는데 그게 문제인거 같다
 
 namespace Part06_Singleton
 {
