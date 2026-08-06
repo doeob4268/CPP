@@ -75,6 +75,62 @@ namespace Part06_Singleton//유일한 객체 하나만 만드는 것, 게임업계에서 많이 쓰임
 	};
 }
 
+namespace Part06_MeyersSingleton
+{
+	class DataService final
+	{
+	public:
+		static DataService& Get();
+
+		void SetValue(int value) noexcept;
+		void AddValue(int value) noexcept;
+
+		[[nodiscard]]
+		int GetValue() const noexcept;
+
+	private:
+		// 객체 생성과 복사 제한
+		DataService() = default;
+		~DataService() = default;
+
+		DataService(const DataService&) = delete;
+		DataService& operator=(const DataService&) = delete;
+
+		DataService(DataService&&) = delete;
+		DataService& operator=(DataService&&) = delete;
+
+		// 멤버 변수
+		int value = 0;
+	};
+}
+
+namespace Part06_Singletons
+{
+	class SingletonA
+	{
+		DECLARE_SINGLETON(SingletonA)
+
+	public:
+		void ShowInfo() const;
+	};
+
+	class SingletonB
+	{
+		DECLARE_SINGLETON(SingletonB)
+
+	public:
+		void ShowInfo() const;
+	};
+
+	class SingletonC
+	{
+		DECLARE_SINGLETON(SingletonC)
+
+	public:
+		void ShowInfo() const;
+	};
+}
+
 class Part06
 {
 public:
@@ -83,6 +139,8 @@ public:
 private:
 	void StaticMember();
 	void Singleton();
+	void MeyersSingleton();
+	void Singletons();
 };
 //싱글턴은 객체를 하나만 만들고 그 객체를 공유해서 쓰는 것, 게임업계에서 많이 쓰임 <- 얘로들면 입력관리, 사운드관리같이 같이 쓰는 것들을 하나로 묶어서 관리할수있다
 //그래서 static을 써서 객체를 공유해서 쓰고 생성자를 private으로 막아서 외부에서 새로 못 만들게 하며, 복사·이동도 delete로 막아서 객체가 오직 하나만 존재하는 패턴이 싱글턴임

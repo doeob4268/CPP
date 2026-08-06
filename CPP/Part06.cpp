@@ -8,7 +8,9 @@ Part06_Singleton::DataManager* Part06_Singleton::DataManager::instance = nullptr
 Part06::Part06()
 {
 	//StaticMember();
-	Singleton();
+	//Singleton();
+	//MeyersSingleton();
+	Singletons();
 }
 
 void Part06::StaticMember()//멤버변수는 객체에 따라 저장된다
@@ -40,8 +42,39 @@ void Part06::Singleton()
 	// 만든 기능들을 전부 1회 이상 활용해보는 예제 직접 만들어보기
 
 	DataManager::Destroy();
-	DataManager::AddData();//비정적 멤버를 참조하려면 특정 개체가 필요합니다가 아래에서 static을 뺴니깐 작동했는데 static을 뺴서 오류가 사라졌는데 이건 같은 오류인데 static을 뺴니깐 오류가 사라졌다, static 뺴도 오류가 안사라진다
+	//DataManager::AddData();//비정적 멤버를 참조하려면 특정 개체가 필요합니다가 아래에서 static을 뺴니깐 작동했는데 static을 뺴서 오류가 사라졌는데 이건 같은 오류인데 static을 뺴니깐 오류가 사라졌다, static 뺴도 오류가 안사라진다
 }//removeData는 이거를 안써도 되는데 아마도 static 유무 차이떄문에 오류가 생기는거같다 <- 스태틱을 쓰면 AddData를 호출할때 객체가 다같이 공유되는데 그게 문제인거 같다
+
+void Part06::MeyersSingleton()
+{
+	using namespace Part06_MeyersSingleton;
+
+	DataService& service1 = DataService::Get();//둘이 똑같은 상태이다
+	DataService& service2 = DataService::Get();
+
+	assert(&service1 == &service2);
+
+	service1.SetValue(10);
+	service2.AddValue(20);
+
+	cout << "===== Meyers Singleton 결과 =====\n";
+	cout << "service1 값 : " << service1.GetValue() << '\n';
+	cout << "service2 값 : " << service2.GetValue() << '\n';
+}
+
+void Part06::Singletons()
+{
+	using namespace Part06_Singletons;
+
+	SingletonA::GET().ShowInfo();
+	cout << '\n';
+
+	SingletonB::GET().ShowInfo();
+	cout << '\n';
+
+	SingletonC::GET().ShowInfo();
+	cout << '\n';
+}
 
 namespace Part06_Singleton
 {
@@ -83,7 +116,7 @@ namespace Part06_Singleton
 			return false;
 		}
 		return true;
-	}
+	} 
 
 	int DataManager::FindIndex(const string& id) const noexcept
 	{
@@ -95,4 +128,47 @@ namespace Part06_Singleton
 		return -1;
 	}
 
+}
+
+namespace Part06_MeyersSingleton
+{
+	DataService& DataService::Get()
+	{
+		static DataService instance;//instance는 Get에서만 접근 가능하다 
+
+		return instance;//instance는 실행이 끝나고 데이터 영역에서 사라진다
+	}
+
+	void DataService::SetValue(int value) noexcept
+	{
+		this->value = value;
+	}
+
+	void DataService::AddValue(int value) noexcept
+	{
+		this->value += value;
+	}
+
+	int DataService::GetValue() const noexcept
+	{
+		return value;
+	}
+}
+
+namespace Part06_Singletons
+{
+	void SingletonA::ShowInfo() const
+	{
+		cout << "SingletonA::ShowInfo() 호출!\n";
+	}
+
+	void SingletonB::ShowInfo() const
+	{
+		cout << "SingletonB::ShowInfo() 호출!\n";
+	}
+
+	void SingletonC::ShowInfo() const
+	{
+		cout << "SingletonC::ShowInfo() 호출!\n";
+	}
 }
