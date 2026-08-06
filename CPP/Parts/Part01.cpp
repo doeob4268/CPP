@@ -10,8 +10,8 @@ Part01::Part01()
 
 void Part01::IOStream()
 {
-	cout << "Hello, World!\n";
-
+	cout << "Hello, World!\n";// endl이랑 없는거랑 차이는 endl을 쓰면 자동으로 개행도(\n)도 출력되고 버퍼에 쌓인걸 즉시 내보냄 
+							//그냥 개행만 쓰느너랑 endl이랑 대량출력할때 속도가 차이가 남 (개행만 쓰는게 빠름)
 	cout << "Int: " << num << ", Float: " << fltNum << '\n';
 
 	cout << "\n데이터 입력 (정수) : ";

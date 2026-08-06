@@ -133,6 +133,18 @@ namespace Part05_ArrayList//얕은 복사로 인해 arr1, arr2, arr3가 같은 힙 공간을 �
 
 		return *this;
 	}
+	ArrayList& ArrayList::operator=(ArrayList&& other) noexcept// 이동 대입: 기존 자원 반납 후, other의 자원을 그대로 가져오고 other는 비움
+	{
+		if (this == &other) return *this;
+
+		SAFE_DELETE_ARRAY(arr);
+
+		cap = exchange(other.cap, 0);
+		numElements = exchange(other.numElements, 0);
+		arr = exchange(other.arr, nullptr);
+
+		return *this;
+	}
 
 	ArrayList& ArrayList::operator=(ArrayList&& other) noexcept
 	{
@@ -151,6 +163,11 @@ namespace Part05_ArrayList//얕은 복사로 인해 arr1, arr2, arr3가 같은 힙 공간을 �
 	{
 		assert(index < numElements && "ArrayList index out of range");
 
+		return arr[index];
+	}
+	const int& ArrayList::operator[](size_t index) const  
+	{
+		assert(index < numElements && "ArrayList index out of range");
 		return arr[index];
 	}
 
