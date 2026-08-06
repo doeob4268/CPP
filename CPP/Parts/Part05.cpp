@@ -11,7 +11,6 @@ void Part05::ArrayListClass()
 	using namespace Part05_ArrayList;
 
 	ArrayList arr1;//ÃÊ±â°ª ¼³Á¤¾ÈÇØ¼­ ±âº»ÀÎÀÚ°ªÀ¸·Î ÃÊ±âÈ­
-	cout << '\n';
 
 	for (int i = 0; i < 10; ++i)//arr1¿¡ 1~10À» ¼ø¼­´ë·Î Ã¤¿ö ³ÖÀ½
 		arr1.push_back(i + 1);
@@ -43,7 +42,8 @@ void Part05::ArrayListClass()
 
 	arr.reserve(capacity);//reserve¸¦ ¾ÈÇÏ¸é Ä³ÆÛ½ºÆ¼°¡ ºÎÁ·ÇÒ¶§¸¶´Ù ÀÌ»ç¸¦ °è¼Ó°¨, ¹«ÅÎ´ë°í push_back ¸· ¾²Áö¸»°í ¼ýÀÚ°¡ ¹Ù²ð¼öµµ ÀÖÀ¸´Ï±ñ reserve »ç¿ëÇÏ±â
 
-	for (int i = 0; i < capacity; ++i)
+	for (int i = 0; i < capacity
+		; ++i)
 		arr.push_back(i + 1);
 
 
@@ -55,11 +55,7 @@ void Part05::ArrayListClass()
 	arr.Print();
 
 	//cout << arr;
-	cout << "\n===== ¹è¿­ ¸®½ºÆ® ¿ø¼Ò(ÈÄÀ§)";
-	cout << arr++ << '\n';
 
-	cout << "\n===== ¹è¿­ ¸®½ºÆ® ¿ø¼Ò(ÀüÀ§)";
-	cout << ++arr << '\n';
 	cout << '\n';
 
 }
@@ -98,7 +94,7 @@ namespace Part05_ArrayList//¾èÀº º¹»ç·Î ÀÎÇØ arr1, arr2, arr3°¡ °°Àº Èü °ø°£À» ¹
 
 		if (numElements > 0)
 		{
-			//assert(other.arr != nullptr);//¾ÈÀüÇÏ°Ô ÇÏ±â À§ÇØ 
+			assert(other.arr != nullptr);//¾ÈÀüÇÏ°Ô ÇÏ±â À§ÇØ 
 			copy_n(other.arr, numElements, arr);//<--¸Þ¸ð¸®Ä«ÇÇÀÇ c++¿ë
 		}
 
@@ -146,19 +142,6 @@ namespace Part05_ArrayList//¾èÀº º¹»ç·Î ÀÎÇØ arr1, arr2, arr3°¡ °°Àº Èü °ø°£À» ¹
 		return *this;
 	}
 
-	ArrayList& ArrayList::operator=(ArrayList&& other) noexcept
-	{
-		if (this == &other) return *this;
-
-		SAFE_DELETE_ARRAY(arr);
-
-		cap = exchange(other.cap, 0);
-		numElements = exchange(other.numElements, 0);
-		arr = exchange(other.arr, nullptr);
-
-		return *this;
-	}
-
 	int& ArrayList::operator[](size_t index)
 	{
 		assert(index < numElements && "ArrayList index out of range");
@@ -168,13 +151,6 @@ namespace Part05_ArrayList//¾èÀº º¹»ç·Î ÀÎÇØ arr1, arr2, arr3°¡ °°Àº Èü °ø°£À» ¹
 	const int& ArrayList::operator[](size_t index) const  
 	{
 		assert(index < numElements && "ArrayList index out of range");
-		return arr[index];
-	}
-
-	const int& ArrayList::operator[](size_t index) const
-	{
-		assert(index < numElements && "ArrayList index out of range");
-
 		return arr[index];
 	}
 
