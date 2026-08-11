@@ -14,7 +14,48 @@ namespace Part07_LinkedListClassTemplate
 	template <typename T>
 	class LinkedList
 	{
+		// Rule of Five
 
+		//맨 뒤 값 추가
+		//맨 앞 값 추가
+
+		//특정 인덱스의 노드 삭제
+
+		//리스트의 모든 노드 삭제하고 초기화
+
+		//[] 인덱스 연산자(읽기/쓰기 버전, 읽기 전용) 구현
+
+		//리스트에 저장된 값의 개수 반환
+
+		//리스트 비어있나 확인
+
+	private:
+		struct Node
+		{
+			Node* nextNode = nullptr;
+			T val;
+
+			Node(const T& v) : val(v), nextNode(nullptr){}
+			
+		};
+		
+		//특정 인덱스에 해당하는 노드 포인터 찾는 함수
+		//void FoundNode()
+		//{
+		//
+		//}
+		//노드 생성(val 받아서)
+		void AddNode(Node val)
+		{
+			for
+			new Node->val = 0;
+		}
+
+		Node* headNode = nullptr;//시작노드
+		Node* tailNode = nullptr;//끝 노드
+
+		size_t numVals = 0;
+		
 	};
 }
 

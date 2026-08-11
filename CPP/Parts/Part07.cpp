@@ -3,7 +3,8 @@
 
 Part07::Part07()
 {
-	FuncTemplate();
+	//FuncTemplate();
+	LinkedListClassTemplate();
 }
 
 void Part07::FuncTemplate()
@@ -63,10 +64,13 @@ void Part07::FuncTemplate()
 
 	cout << '\n';
 }
+// 배열리스트는 시간복잡도는 O(N)이므로 삽입, 삭제가 오래걸림 / 인덱스 연산은(탐색) O(1)이여서 빠름
 
 void Part07::LinkedListClassTemplate()
 {
 	using namespace Part07_LinkedListClassTemplate;
 
-
+	cout << "===== 연결 리스트 1 원소 =====\n";
+	
 }
+//연결리스트는 삽입 삭제가 O(1)이고 탐색은 O(N)인데 삽입 삭제를 하려면 O(N) 으로 위치를 찾아야해서 활용도는 낮음
