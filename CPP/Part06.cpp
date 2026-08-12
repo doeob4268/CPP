@@ -117,7 +117,12 @@ namespace Part06_Singleton
 		}
 		return true;
 	} 
+	void DataManager::Clear() noexcept
+	{
+		cout << "데이터 전체 초기화";
 
+		numDatas = 0; // numDatas가 0이 되어도 datas 배열 안의 실제 값들은 메모리에 그대로 남아있다 그래서 싱글턴 객체는 유지는 하고 데이터를 0으로 초기화 함
+	}
 	int DataManager::FindIndex(const string& id) const noexcept
 	{
 		for (size_t i = 0; i < numDatas; ++i)
