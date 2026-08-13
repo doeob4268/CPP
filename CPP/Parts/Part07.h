@@ -14,6 +14,7 @@ namespace Part07_LinkedListClassTemplate
 	template <typename T>
 	class LinkedList
 	{
+		
 		// Rule of Five
 
 		//맨 뒤 값 추가
@@ -45,10 +46,12 @@ namespace Part07_LinkedListClassTemplate
 		//
 		//}
 		//노드 생성(val 받아서)
-		void AddNode(Node val)
+		void AddNode(T val)
 		{
-			for
-			new Node->val = 0;
+			Node* newNode = new Node(val);
+			headNode = newNode;
+			tailNode = newNode;
+			++numVals;
 		}
 
 		Node* headNode = nullptr;//시작노드
