@@ -4,7 +4,9 @@
 Part07::Part07()
 {
 	//FuncTemplate();
-	LinkedListClassTemplate();
+	//LinkedListClassTemplate();
+	//SingletonClassTemplate();
+	ClassTemplateSpecialization();
 }
 
 void Part07::FuncTemplate()
@@ -75,3 +77,29 @@ void Part07::LinkedListClassTemplate()
 
 }
 //연결리스트는 삽입 삭제가 O(1)이고 탐색은 O(N)인데 삽입 삭제를 하려면 O(N) 으로 위치를 찾아야해서 활용도는 낮음
+
+void Part07::SingletonClassTemplate()
+{
+	using namespace Part07_SingletonClassTemplate;
+
+	Widget& widget = Widget::Get();
+
+	widget.ShowInfo();
+	cout << '\n';
+	widget.ShowInfo();
+	cout << '\n';
+	widget.ShowInfo();
+	cout << '\n';
+}
+
+void Part07::ClassTemplateSpecialization()
+{
+	using namespace Part07_ClassTemplateSpecialization;
+
+	Datas<string, string> data1;
+	cout << '\n';
+	Datas<int, string> data2;
+	cout << '\n';
+	Datas<int, float> data3;
+	cout << '\n';
+}
