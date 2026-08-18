@@ -118,7 +118,7 @@ namespace Part07_ClassTemplateSpecialization
 	class Datas<int, T>		//앞에있는 애를 int T로 특수화 한다
 	{						//템플릿을 활용하여 부분 특수화가 가능하다
 	public:
-		Datas() { cout << "Datas<int, T>::Datas() 생성자 실행 완료!\n"; }
+		Datas() { cout << "Datas<int, T>::Datas() 생성자 실행 완료!\n"; }//
 
 
 	private:
