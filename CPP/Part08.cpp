@@ -18,5 +18,14 @@ void Part08::Auto()//예전 c에서는 auto = 전역 / 지역 구분짓기 위해 사용함
 
 void Part08::RangeBaseFor()
 {
+	array<int, 5> arr = { 1,2,3,4,5 };
+
+	cout << "===== 일반 for문 결과 =====\n";//index base for문이라고 한다 이러한 방법은 
+	for (int i = 0; i < arr.size(); ++i)
+		cout << arr[i] << ", ";
+
+	cout << "\n\n===== 범위 기반 for문 결과 =====\n";
+	for (int val : arr)
+		cout << val << ", ";
 
 }
