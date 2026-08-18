@@ -9,7 +9,7 @@ Part06::Part06()
 {
 	//StaticMember();
 	//Singleton();
-	//MeyersSingleton();
+	//MeyersSingleton();//
 	Singletons();
 }
 
