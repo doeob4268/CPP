@@ -7,4 +7,5 @@ public:
 
 private:
 	void Auto();
+	void RangeBaseFor();
 };
