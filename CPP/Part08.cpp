@@ -1,10 +1,12 @@
 #include "pch.h"
+#include <iomanip>
 #include "Part08.h"
 
 Part08::Part08()
 {
 	//Auto();
-	RangeBaseFor();
+	//RangeBaseFor();
+	AutoPtr();
 }
 
 void Part08::Auto()//예전 c에서는 auto = 전역 / 지역 구분짓기 위해 사용함
@@ -25,8 +27,51 @@ void Part08::RangeBaseFor()
 	for (int i = 0; i < arr.size(); ++i)
 		cout << arr[i] << ", ";
 
-	cout << "\n\n===== 범위 기반 for문 결과 =====\n";
+	cout << "\n\n===== 범위 기반 for문 결과 =====\n";//범위 기반 for문에서도 참조를 사용할 수 있다
+	for (int& ref : arr)
+		ref *= 2;
+
 	for (int val : arr)
 		cout << val << ", ";
 
+	int matrix[5][5]{};
+	cout << "\n\n===== 2차원 배열 범위 기반 for문 결과(원시 배열) ===== \n";
+	int value = 1;
+
+	for (auto& row : matrix)
+	{
+		for (int& elem : row)
+			elem = value++;
+	}
+
+	for (const auto& row : matrix)//바뀌지 않을값이라면 const를 넣도록 하자.
+	{
+		for (int elem : row)
+			cout << elem << ", ";
+
+		cout << '\n';
+	}
+
+	array<array<int, 5>, 5> matrix2{};
+	cout << "\n\n===== 2차원 배열 범위 기반 for문 결과(STL array) =====\n";
+	value = 1;
+
+	for (auto& row : matrix2)//값 늘어나는
+	{
+		for (int& elem : row)
+			elem = value++;
+	}
+
+	for (const auto& row : matrix2)
+	{
+		for (int elem : row)
+			cout << setw(2) << elem << ", ";//setw 최소 2칸을 차지하게 만들게 (공백넣기 <- 일렬로 깔끔해보이게)
+
+		cout << '\n';
+	}
+}
+
+void Part08::AutoPtr()
+{
+	using namespace Part08_SmartPointer;
 }
