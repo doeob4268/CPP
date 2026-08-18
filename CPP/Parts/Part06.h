@@ -43,6 +43,7 @@ namespace Part06_Singleton//유일한 객체 하나만 만드는 것, 게임업계에서 많이 쓰임
 		 void AddData()noexcept;
 		 void RemoveData()noexcept;
 		 bool Contains(); //존재 확인은 예 아니오로 할수있게 bool로 반환 <- empty와 어떤 차이인지 잘 모르겠다 contains는 객체안에 데이터가 있는지 확인하는거고 empty는 함수가 비어있는지 확인하도록 만들라는거같음
+		 void Clear();
 
 		//// 데이터 추가 함수 (AddData)
 		//// 데이터 삭제 함수 (RemoveData)
