@@ -82,8 +82,8 @@ namespace Part06_Singleton
 	{
 		if (instance == nullptr)
 			instance = new DataManager();//이런 기법을 게으른 초기화 라고 한다
-										//장점 : 필요하기 전까지 안 만들수있다 (메모리 이점)
-										//단점 : 런타임에 동적할당 하는거기 때문에 (로딩창 없이) 좋지 않다 
+		//장점 : 필요하기 전까지 안 만들수있다 (메모리 이점)
+		//단점 : 런타임에 동적할당 하는거기 때문에 (로딩창 없이) 좋지 않다 
 		return instance;
 	}
 
@@ -99,7 +99,7 @@ namespace Part06_Singleton
 	void DataManager::RemoveData() noexcept
 	{
 		cout << "데이터 삭제하기";
-	
+
 		numDatas--; //추가에서 하나 늘렸으면 삭제하기에서 하나 줄여야한다 이것도 마찬가지로 static를 뺴니깐 작동했는데 static을 뺴니깐 오류가 사라졌다
 		if (numDatas < 0)//근데 0보다 작아지면 안되기 때문에 0보다 작으면 0으로 초기화 시켜준다
 		{
@@ -116,7 +116,7 @@ namespace Part06_Singleton
 			return false;
 		}
 		return true;
-	} 
+	}
 	void DataManager::Clear() noexcept
 	{
 		cout << "데이터 전체 초기화";
