@@ -3,7 +3,8 @@
 
 Part08::Part08()
 {
-	Auto();
+	//Auto();
+	RangeBaseFor();
 }
 
 void Part08::Auto()//예전 c에서는 auto = 전역 / 지역 구분짓기 위해 사용함

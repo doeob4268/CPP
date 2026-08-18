@@ -64,14 +64,14 @@ void Part06::Singletons()
 {
 	using namespace Part06_Singletons;
 
-	SingletonA::Get().ShowInfo();
-	cout << '\n';
-
-	SingletonB::Get().ShowInfo();
-	cout << '\n';
-
-	SingletonC::Get().ShowInfo();
-	cout << '\n';
+	//SingletonA::Get().ShowInfo();
+	//cout << '\n';
+	//
+	//SingletonB::Get().ShowInfo();
+	//cout << '\n';
+	//
+	//SingletonC::Get().ShowInfo();
+	//cout << '\n';
 }
 
 namespace Part06_Singleton
