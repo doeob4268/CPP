@@ -19,4 +19,5 @@ private:
 	void Auto();
 	void RangeBaseFor();
 	void AutoPtr();
+	void UniquePtr();
 };

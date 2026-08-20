@@ -6,7 +6,8 @@ Part08::Part08()
 {
 	//Auto();
 	//RangeBaseFor();
-	AutoPtr();
+	//AutoPtr();
+	UniquePtr();
 }
 
 void Part08::Auto()//예전 c에서는 auto = 전역 / 지역 구분짓기 위해 사용함
@@ -71,7 +72,69 @@ void Part08::RangeBaseFor()
 	}
 }
 
-void Part08::AutoPtr()
+void Part08::AutoPtr()//자동으로 해제 해주는게 autoptr
 {
 	using namespace Part08_SmartPointer;
+
+	auto_ptr<int> autoPtr(new int(10));//포인터를 객체로 만들고 소멸될때 할당받은 자원을(new int(10)) autoptr 소멸자가 실행될때 해제해줌
+	*autoPtr = 20;//연산자 오버로딩때문에 간접참조가 된다
+
+	cout << "autoPtr : " << autoPtr.get() << ", " << *autoPtr << "\n\n";
+
+	int* otherPtr = autoPtr.get();
+	*otherPtr = 30;
+
+	cout << "autoPtr : " << autoPtr.get() << ", " << *autoPtr << "\n\n";
+
+	otherPtr = new int;
+
+	autoPtr.reset(otherPtr);//otherPtr해제시키고 그냥 리셋만 할수있고 otherPtr을 넣으면 otherPtr로 해제됨 / autoPtr이 해제될때 new int도 해제된다는 말
+	*autoPtr = 30;
+
+	cout << "otherPtr : " << otherPtr << ", " << *otherPtr << "\n\n";
+
+	int* otherPtr2 = autoPtr.release();//null로 바꿈 가지고있던걸 반환하고 otherPtr2가 가져감 <- 값이 똑같음 근데 릴리스를 otherPtr2로 받아서 (otherPtr2 해제를 해야한다)
+
+	cout << "otherPtr2 : " << otherPtr2 << ", " << *otherPtr2 << "\n\n";
+
+	SAFE_DELETE(otherPtr2);
+
+	auto_ptr<Widget> ptr1(new Widget());
+	auto_ptr<Widget> ptr2;
+
+	cout << "\n===== auto_ptr 권한 위임 전 =====\n";
+	if (ptr1.get() != nullptr)
+		cout << "ptr1 객체가 권한을 가지고 있습니다!\n";
+	if (ptr2.get() != nullptr)
+		cout << "ptr2 객체가 권한을 가지고 있습니다!\n";
+
+	ptr2 = ptr1;//대입연산자를 사용했지만 복사는 안되고 이동이 됨 (ptr1이 가지고 있던걸 ptr2가 뺏어버림) / autoPtr의 치명적인 결함
+
+	cout << "\n===== auto_ptr 권한 위임 후 =====\n";
+	if (ptr1.get() != nullptr)
+		cout << "ptr1 객체가 권한을 가지고 있습니다!\n";
+	if (ptr2.get() != nullptr)
+		cout << "ptr2 객체가 권한을 가지고 있습니다!\n";
+}
+
+void Part08::UniquePtr()
+{
+	using namespace Part08_SmartPointer;
+
+	unique_ptr<Widget> ptr1(new Widget());
+	unique_ptr<Widget> ptr2;
+
+	cout << "\n===== auto_ptr 권한 위임 전 =====\n";
+	if (ptr1.get() != nullptr)
+		cout << "ptr1 객체가 권한을 가지고 있습니다!\n";
+	if (ptr2.get() != nullptr)
+		cout << "ptr2 객체가 권한을 가지고 있습니다!\n";
+
+	ptr2 = move(ptr1);
+
+	cout << "\n===== auto_ptr 권한 위임 후 =====\n";
+	//if (ptr1.get() != nullptr)
+	//	cout << "ptr1 객체가 권한을 가지고 있습니다!\n";
+	if (ptr2.get() != nullptr)
+		cout << "ptr2 객체가 권한을 가지고 있습니다!\n\n";
 }
