@@ -9,8 +9,8 @@ int main()
 	//Part04 part04;
 	//Part05 part05;
 	//Part06 part06;
-	//Part07 Part07;
-	Part08 Part08;
+	Part07 Part07;
+	//Part08 Part08;
 
 
 	cout << '\n';
