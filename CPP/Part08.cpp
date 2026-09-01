@@ -4,10 +4,11 @@
 
 Part08::Part08()
 {
-    //Auto();
+    //Auto(); //17버전에서 삭제
     //RangeBaseFor();
     //AutoPtr();
-    UniquePtr();
+    //UniquePtr();
+    SharedPtr();
 }
 
 void Part08::Auto()//예전 c에서는 auto = 전역 / 지역 구분짓기 위해 사용함
@@ -20,7 +21,7 @@ void Part08::Auto()//예전 c에서는 auto = 전역 / 지역 구분짓기 위해 사용함
     cout << val1 << ", " << val2 << ", " << str << '\n';
 }//실수방지, 타이핑 줄이기 등등 사용됨
 
-void Part08::RangeBaseFor()
+void Part08::RangeBasedFor()
 {
     array<int, 5> arr = { 1,2,3,4,5 };
 
@@ -108,7 +109,7 @@ void Part08::AutoPtr()//자동으로 해제 해주는게 autoptr
     if (ptr2.get() != nullptr)
         cout << "ptr2 객체가 권한을 가지고 있습니다!\n";
 
-    ptr2 = ptr1;//대입연산자를 사용했지만 복사는 안되고 이동이 됨 (ptr1이 가지고 있던걸 ptr2가 뺏어버림) / autoPtr의 치명적인 결함
+    ptr2 = ptr1;//대입연산자를 사용했지만 복사는 안되고 이동이 됨 (ptr1이 가지고 있던걸 ptr2가 뺏어버림) / autoPtr의 치명적인 결함 (파괴적인 복사)
 
     cout << "\n===== auto_ptr 권한 위임 후 =====\n";
     if (ptr1.get() != nullptr)
@@ -121,7 +122,8 @@ void Part08::UniquePtr()
 {
     using namespace Part08_SmartPointer;
 
-    unique_ptr<Widget> ptr1(new Widget());
+    //unique_ptr<Widget> ptr1(new Widget());
+    auto ptr1 = make_unique<Widget>(); // -> 14버전에서 나옴 
     unique_ptr<Widget> ptr2;
 
     cout << "\n===== auto_ptr 권한 위임 전 =====\n";
@@ -137,7 +139,50 @@ void Part08::UniquePtr()
     //   cout << "ptr1 객체가 권한을 가지고 있습니다!\n";
     if (ptr2.get() != nullptr)
         cout << "ptr2 객체가 권한을 가지고 있습니다!\n\n";
+
+    unique_ptr<FILE, decltype(&CloseFStream)> wStreamPtr(fopen("Part08.txt", "wt"), &CloseFStream);//decltype 자동으로 자료형 대입해줌 fclose 주소만 넣으면 알아서 타입을 넣어준다
+
+    if (wStreamPtr.get() != nullptr)
+        fprintf(wStreamPtr.get(), "Hello World!\n");
 }
+
+void Part08::SharedPtr()//컨트롤 블락은 별도의 공간이여서 부분특수화같은게 필요없다
+{//deprecated //삭제 예정인데 아직 사용 가능하다 
+    using namespace Part08_SmartPointer;
+
+    auto sharedPtr1 = make_shared<Widget>();
+    shared_ptr<Widget> sharedPtr2;//shared_ptr가 몇개의 자원을 물고있나가 -> 래퍼런스 포인터
+
+    cout << "\n===== sharedPtr2 할당 전 =====\n";
+    cout << "Ref Count : " << sharedPtr1.use_count() << '\n';
+
+    sharedPtr2 = sharedPtr1;//이 행위 자체가 공유한다는 뜻
+
+    cout << "\n===== sharedPtr2 할당 후 =====\n";
+    cout << "Ref Count : " << sharedPtr1.use_count() << '\n';
+
+    sharedPtr1.reset();//매개변수없으면 그냥 주소값 nullPtr로 바꾸기
+
+    cout << "\n===== sharedPtr1 참조 해제 후 =====\n";
+    cout << "Ref Count : " << sharedPtr2.use_count() << '\n';
+
+    shared_ptr<FILE> rStreamPtr(fopen("part08.txt", "rt"), &CloseFStream);
+
+    if (rStreamPtr.get() != nullptr)
+    {
+        char buffer[20] = { 0 };
+        fgets(buffer, sizeof(buffer), rStreamPtr.get());
+        cout << "\n===== Part08.txt 출력 =====\n";
+        cout << buffer << '\n';
+    }
+}
+
+void Part08::CloseFStream(FILE* stream)
+{
+    fclose(stream);
+    cout << "CloseFStream() 호출!\n";
+}
+
 
 //void reset(_Ty* _Ptr = nullptr) noexcept
 //{                        // destroy designated object and store new pointer
@@ -149,9 +194,9 @@ void Part08::UniquePtr()
 //   _Myptr = _Ptr;
 //}
 
-//reset에 인자가 없으면 그냥 해제한다는 것 (스마트 포인터를 빈 상태로 만들겠다는 뜻)
+// ^^^ reset에 인자가 없으면 그냥 해제한다는 것 (스마트 포인터를 빈 상태로 만들겠다는 뜻)
 
-//서로 다른 포인터여야 함
+// ^^^ 서로 다른 포인터여야 함
 
 //그리고 autoPtr.reset(otherPtr); autoPtr이 해제되고 otherPtr의 주소값을 가지고 소유권도 가지게 된다는건데 소유권을 이전한다는게 아마도 
 //otherPtr은 해제해도 그것만 해제되는거지만 autoPtr이 해제되면 나머지 주소값이 같은 모든 포인터들이 해제 된다는거 같다 autoPtr이라는 큰 범위 안에 otherPtr이 있다는 뜻

@@ -17,7 +17,10 @@ public:
 
 private:
 	void Auto();
-	void RangeBaseFor();
+	void RangeBasedFor();
 	void AutoPtr();
 	void UniquePtr();
+	void SharedPtr();
+
+	static void CloseFStream(FILE* stream);
 };
