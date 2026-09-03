@@ -8,7 +8,9 @@ Part08::Part08()
     //RangeBaseFor();
     //AutoPtr();
     //UniquePtr();
-    SharedPtr();
+    //SharedPtr();
+    //WeakPtr();  
+    Lambda();
 }
 
 void Part08::Auto()//예전 c에서는 auto = 전역 / 지역 구분짓기 위해 사용함
@@ -177,12 +179,34 @@ void Part08::SharedPtr()//컨트롤 블락은 별도의 공간이여서 부분특수화같은게 필요�
     }
 }
 
+void Part08::WeakPtr()
+{
+    using namespace Part08_WeakPointer;
+
+    shared_ptr<Entity> player = make_shared<Entity>();
+    player->AddComponent(make_shared<Component>());
+
+    cout << '\n';
+
+    player->Update();
+
+    cout << '\n';
+}
+
 void Part08::CloseFStream(FILE* stream)
 {
     fclose(stream);
-    cout << "CloseFStream() 호출!\n";
+    cout << "CloseFStream() 실행 완료!\n";
 }
 
+namespace Part08_WeakPointer
+{
+    void Component::Update()
+    {
+        if (!owner.expired())
+            owner.lock()->Func();
+    }
+}
 
 //void reset(_Ty* _Ptr = nullptr) noexcept
 //{                        // destroy designated object and store new pointer
