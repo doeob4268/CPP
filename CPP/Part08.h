@@ -22,11 +22,11 @@ namespace Part08_WeakPointer//sharedptr에서 서로 참조해서 카운트가 그대로인 문제
 
 		weak_ptr<Entity> owner;
 
-		void Update()
-		{
-			if (!owner.expired())//만료되지 않았다면 
-				owner.lock()->Func();
-		}
+		void Update();
+		//{
+		//	if (!owner.expired())//만료되지 않았다면 
+		//		owner.lock()->Func();
+		//}
 	};
 
 	class Entity : public enable_shared_from_this<Entity>

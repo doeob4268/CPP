@@ -27,6 +27,9 @@
     <ClCompile Include="Part08.cpp">
       <Filter>Parts</Filter>
     </ClCompile>
+    <ClCompile Include="Part09.cpp">
+      <Filter>Parts</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -53,6 +56,9 @@
       <Filter>Parts</Filter>
     </ClInclude>
     <ClInclude Include="Part08.h">
+      <Filter>Parts</Filter>
+    </ClInclude>
+    <ClInclude Include="Part09.h">
       <Filter>Parts</Filter>
     </ClInclude>
   </ItemGroup>

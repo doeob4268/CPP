@@ -7,6 +7,10 @@
 #include <cassert>
 #include <vector>
 #include <array>
+#include <memory>
+#include <functional>
+#include <algorithm>
+#include <string>
 
 #define SAFE_DELETE(p) do { delete(p); p = nullptr; } while (0)
 #define SAFE_DELETE_ARRAY(p) do { delete[](p); p = nullptr; } while (0)
