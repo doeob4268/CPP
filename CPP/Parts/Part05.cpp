@@ -38,7 +38,7 @@ void Part05::ArrayListClass()
 	ArrayList arr;
 	//vector<int> arr;//템플릿을 사용함
 
-	constexpr int capacity = 10;
+	constexpr int capacity = 10;//constexpr 런타임전에 컴파일때 계산을 끝낼때 쓰는거
 
 	arr.reserve(capacity);//reserve를 안하면 캐퍼스티가 부족할때마다 이사를 계속감, 무턱대고 push_back 막 쓰지말고 숫자가 바뀔수도 있으니깐 reserve 사용하기
 
