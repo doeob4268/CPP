@@ -38,7 +38,7 @@ void Part06::Singleton()
 	DataManager* manager = DataManager::Get();
 	assert(manager == DataManager::Get());
 
-	// 만든 기능들을 전부 1회 이상 활용해보는 예제 직접 만들어보기
+
 
 	DataManager::Destroy();
 }

@@ -3,7 +3,7 @@
 
 Part04::Part04()
 {
-	//Inheritance();
+	Inheritance();
 	Polymorphsim();
 }
 
