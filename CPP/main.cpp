@@ -11,7 +11,7 @@ int main()
 	//Part06 part06;
 	//Part07 Part07;
 	//Part08 Part08;
-
+	Part09 part09;
 
 	cout << '\n';
 	system("pause");
