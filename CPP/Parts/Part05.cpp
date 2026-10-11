@@ -13,7 +13,7 @@ void Part05::ArrayListClass()
 	ArrayList arr1;//초기값 설정안해서 기본인자값으로 초기화
 
 	for (int i = 0; i < 10; ++i)//arr1에 1~10을 순서대로 채워 넣음
-		arr1.push_back(i + 1);
+		arr1.push_back(i + 1);//함수를 호출하여 i + 1의 값을 arr1의 마지막 위치에 추가한다. 반복문에서 i가 0부터 9까지 증가하기 때문에 i + 1은 1부터 10까지 순서대로 계산되며, 결과적으로 arr1에는 1부터 10까지의 원소가 저장함
 
 	ArrayList arr2(arr1);//arr1을 복제해서 arr2를 만듦 (복사 생성자)
 	cout << '\n';
@@ -35,13 +35,13 @@ void Part05::ArrayListClass()
 
 	cout << '\n';
 
-	ArrayList arr;
+	ArrayList arr;//ArrayList arr1을 선언하여 배열 리스트를 생성한 후, 반복문과 push_back(i + 1) 함수를 이용해 1부터 10까지의 값을 순서대로 추가하고, ArrayList arr2(arr1)을 통해 arr1의 값을 복사 생성자로 복사하여 arr2를 생성하며, ArrayList arr3을 통해 빈 배열 리스트를 먼저 생성한 다음 arr3 = arr1을 실행하여 복사 대입 연산자로 arr1의 값을 arr3에 복사하고 arr1, arr2, arr3 저장된 원소 출력함
 	//vector<int> arr;//템플릿을 사용함
 
-	constexpr int capacity = 10;
+	constexpr int capacity = 10;//프로그램이 실행되기도 전에 컴퓨터가 미리 계산을 다 끝내버림 그래서 속도가 빨라짐 / 컴파일할 때 정해진 값이기 때문에, 프로그램이 실행되는 도중에 이 값을 바꾸려고 하면 컴퓨터가 에러가 나고
 
 	arr.reserve(capacity);//reserve를 안하면 캐퍼스티가 부족할때마다 이사를 계속감, 무턱대고 push_back 막 쓰지말고 숫자가 바뀔수도 있으니깐 reserve 사용하기
-
+	//함수를 호출하여 배열 리스트 arr에 원소를 추가하기 전에 메모리 공간을 미리 확보하는 역할을 하고 capacity는 앞에서 10으로 설정했으므로 최소 10개의 원소를 저장할 수 있는 용량을 확보하며, 원소를 추가할 때마다 메모리 공간이 부족해져 새로운 메모리를 할당하고 기존 원소들을 옮기는 작업이 발생하는 것을 줄일 수 있
 	for (int i = 0; i < capacity
 		; ++i)
 		arr.push_back(i + 1);

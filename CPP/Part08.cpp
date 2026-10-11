@@ -16,7 +16,7 @@ Part08::Part08()
 void Part08::Auto()//예전 c에서는 auto = 전역 / 지역 구분짓기 위해 사용함
 {//요즘 cpp에는 컴파일러가 자동으로 추론한 자료형을 그대로 쓰는게 auto임 그래서 auto앞에 자료형쓰면 오류남 
    //-> 3.14이런식이면 double, 3.14f는 float 이런식 ( 숫자에 커서를 올리면 뜸 ) / 너무 남발 금지
-    auto val1 = 10;
+    auto val1 = 10;//자료형을 직접 작성하지 않고, 오른쪽에 있는 초기값을 보고 컴파일러가 변수의 자료형을 자동으로 결정하도록 하는 코드이고 10은 정수형 값이기 때문에 컴파일러가 val1의 자료형을 int로 자동으로 정해진다 결정된 이후에는 일반적인 변수처럼 그 자료형으로 유지함
     auto val2 = 3.14f;
     string str = "Hello, World!";
 
@@ -78,7 +78,7 @@ void Part08::RangeBasedFor()
 void Part08::AutoPtr()//자동으로 해제 해주는게 autoptr
 {
     using namespace Part08_SmartPointer;
-
+    //new int(10)으로 정수 값 10을 저장할 메모리를 동적으로 할당하고, 그 메모리의 주소를 autoPtr이라는 스마트 포인터 객체에 전달하는 코드이고 auto_ptr<int>에서 int는 관리할 데이터의 자료형을 의미하고, autoPtr은 스마트 포인터 객체의 이름이다. 일반 포인터와 달리 autoPtr은 자신이 관리하는 메모리를 자동으로 해제하며, autoPtr 객체가 소멸할 때 소멸자가 실행되어 할당받은 메모리를 해제한다. 따라서 직접 delete를 호출하지 않아도 메모리 누수를 방지함
     auto_ptr<int> autoPtr(new int(10));//포인터를 객체로 만들고 소멸될때 할당받은 자원을(new int(10)) autoptr 소멸자가 실행될때 해제해줌
     *autoPtr = 20;//연산자 오버로딩때문에 간접참조가 된다
 
@@ -90,12 +90,12 @@ void Part08::AutoPtr()//자동으로 해제 해주는게 autoptr
     cout << "autoPtr : " << autoPtr.get() << ", " << *autoPtr << "\n\n";
 
     otherPtr = new int;
-
+    //autoPtr이 현재 관리하고 있는 메모리를 해제한 다음, otherPtr이 가리키는 메모리를 새롭게 관리하도록 변경하는 기능이다. 여기서 기존 autoPtr이 관리하던 메모리가 있다면 먼저 해제되며, 이후 otherPtr이 가리키는 메모리의 소유권을 autoPtr로 넘겨준다
     autoPtr.reset(otherPtr);//autoPtr해제시키고 소유권을 otherPtr -> autoPtr로 준다는 뜻 / autoPtr이 해제될때 new int도 해제됨
     *autoPtr = 30;
 
     cout << "otherPtr : " << otherPtr << ", " << *otherPtr << "\n\n";
-
+    //autoPtr이 관리하던 메모리의 주소를 반환하여 otherPtr2에 저장하고, autoPtr은 더 이상 해당 메모리를 관리하지 않도록 만드는 코드이다 / 메모리 안의 값이 복사되는 것이 아니라 메모리의 주소가 전달, 메모리를 자동으로 해제하지 않는다. 그러므로 otherPtr2가 메모리를 관리하는 역할을 맡게 되며, 사용이 끝나면 delete otherPtr2;를 호출하여 직접 메모리를 해제해야함 (메모리 권한만 넘겨줌)
     int* otherPtr2 = autoPtr.release();//null로 바꿈 가지고있던걸 반환하고 otherPtr2가 가져감 <- 값이 똑같음 근데 릴리스를 otherPtr2로 받아서 (otherPtr2 해제를 해야한다)
 
     cout << "otherPtr2 : " << otherPtr2 << ", " << *otherPtr2 << "\n\n";
@@ -120,12 +120,12 @@ void Part08::AutoPtr()//자동으로 해제 해주는게 autoptr
         cout << "ptr2 객체가 권한을 가지고 있습니다!\n";
 }
 
-void Part08::UniquePtr()
+void Part08::UniquePtr()//동적으로 할당한 메모리를 자동으로 관리하는 스마트 포인터로, 하나의 메모리를 한 번에 하나의 unique_ptr만 소유하도록 제한시킴
 {
     using namespace Part08_SmartPointer;
 
     //unique_ptr<Widget> ptr1(new Widget());
-    auto ptr1 = make_unique<Widget>(); // -> 14버전에서 나옴 
+    auto ptr1 = make_unique<Widget>(); // -> 14버전에서 나옴 //Widget 객체를 동적으로 생성하고, 그 객체를 관리하는 unique_ptr을 만들고 auto는 오른쪽의 반환값을 바탕으로 자료형을 자동으로 결정하므로, ptr1의 실제 자료형은 unique_ptr<Widget>다 / Widget 객체를 생성하고 그 객체의 소유권을 ptr1에 전달하며, ptr1이 소멸하면 관리하던 Widget 객체와 메모리도 자동으로 정리함
     unique_ptr<Widget> ptr2;
 
     cout << "\n===== auto_ptr 권한 위임 전 =====\n";
@@ -148,12 +148,12 @@ void Part08::UniquePtr()
         fprintf(wStreamPtr.get(), "Hello World!\n");
 }
 
-void Part08::SharedPtr()//컨트롤 블락은 별도의 공간이여서 부분특수화같은게 필요없다
+void Part08::SharedPtr()//컨트롤 블락은 별도의 공간이여서 부분특수화같은게 필요없다//객체를 여러 스마트 포인터가 공동으로 소유하고 관리할 수 있도록 해 주는 스마트 포인터다 그리고 아무도 쓰지 않게 되면(참조 횟수가 0이 되면) 컴퓨터가 알아서 자동으로 메모리를 삭제함
 {//deprecated //삭제 예정인데 아직 사용 가능하다 
     using namespace Part08_SmartPointer;
 
     auto sharedPtr1 = make_shared<Widget>();
-    shared_ptr<Widget> sharedPtr2;//shared_ptr가 몇개의 자원을 물고있나가 -> 래퍼런스 포인터
+        shared_ptr<Widget> sharedPtr2;//shared_ptr가 몇개의 자원을 물고있나가 -> 래퍼런스 포인터
 
     cout << "\n===== sharedPtr2 할당 전 =====\n";
     cout << "Ref Count : " << sharedPtr1.use_count() << '\n';
@@ -179,8 +179,9 @@ void Part08::SharedPtr()//컨트롤 블락은 별도의 공간이여서 부분특수화같은게 필요�
     }
 }
 
-void Part08::WeakPtr()
-{
+void Part08::WeakPtr()//shared_ptr이 관리하는 객체를 소유권 없이 참조하는 스마트 포인터
+//weakPtr이 객체를 가리키고 있었더라도 소유권이 없기 때문에 객체의 메모리 해제를 못함
+{//모든 shared_ptr이 소멸하면 객체의 메모리는 해제된다 lock()으로 객체가 살아 있는지 확인하고 접근할 수 있으며, 주로 shared_ptr의 순환 참조 문제를 방지
     using namespace Part08_WeakPointer;
 
     shared_ptr<Entity> player = make_shared<Entity>();
